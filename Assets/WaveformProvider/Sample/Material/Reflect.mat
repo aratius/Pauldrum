@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Reflect
   m_Shader: {fileID: 4800000, guid: d9b1984e546a6c84181b4043c8b543e7, type: 3}
   m_ShaderKeywords: 
@@ -91,3 +92,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _UVOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
