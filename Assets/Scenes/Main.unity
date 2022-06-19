@@ -175,7 +175,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -219,6 +219,8 @@ GameObject:
   - component: {fileID: 285564185}
   - component: {fileID: 285564184}
   - component: {fileID: 285564183}
+  - component: {fileID: 285564188}
+  - component: {fileID: 285564189}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -241,12 +243,12 @@ MonoBehaviour:
   update: 1
   updateFrameTiming: 3
   adjuster: 0
-  stride: 1
+  stride: 3.4
   attenuation: 0.96
-  propagationSpeed: 0.1
+  propagationSpeed: 0.5
   inputTextureSize: 512
-  output: {fileID: 0}
-  debug: 0
+  output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
+  debug: 1
 --- !u!64 &285564184
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7fd0b6b6dd09e4981acfb518311fdb98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -317,13 +319,41 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285564182}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.263916, y: 1.4400096, z: 4.967783}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &285564188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285564182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ac568b09c2b3c4aac9162e90f81e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
+  waveScale: 0.05
+  strength: 0.1
+--- !u!114 &285564189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285564182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed560f6b79ecf47dbab8cb66d33140e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveMap: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
 --- !u!1 &1514568150
 GameObject:
   m_ObjectHideFlags: 0
