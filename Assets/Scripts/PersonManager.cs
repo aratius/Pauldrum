@@ -12,12 +12,10 @@ namespace Es.WaveformProvider.Sample
     private OscManager _oscManager;
     [SerializeField]
     private Texture2D waveform;
-    [SerializeField, Range(0f, 1f)]
-    private float waveScale = 0.05f;
-    [SerializeField, Range(0f, 1f)]
-    private float strength = 0.1f;
     [SerializeField]
-    private DetectHeight _detectHeight;
+    private CollisionDetection _collisionDetection;
+    [SerializeField]
+    private PersonWaveInput _personWaveInput;
 
     void Start()
     {
@@ -39,21 +37,12 @@ namespace Es.WaveformProvider.Sample
       Vector2 size = new Vector2(Screen.width, Screen.height);
       // Vector2 screenPos = position * size;
       // NOTE: TouchOSCの値に合わせてむりやり値調整しています
-      Vector2 screenPos = new Vector2(position.y, position.x) * size;
+      Vector2 uvPos = new Vector2(position.y, position.x);
+      Vector2 screenPos = uvPos * size;
 
-      var ray = Camera.main.ScreenPointToRay(screenPos);
-      RaycastHit hitInfo;
-      if (Physics.Raycast(ray, out hitInfo))
+      if(await this._collisionDetection.IsCollided(screenPos))
       {
-        var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
-        if (waveObject != null)
-          {
-            // waveObject.Input(waveform, hitInfo, waveScale, strength);
-            Vector2 hitPointNormalized = hitInfo.textureCoord2;
-            Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
-            Debug.Log(height);
-            if(height.r > 0.5) waveObject.Input(waveform, hitInfo, waveScale, strength);
-          }
+        this._personWaveInput.Input(uvPos);
       }
     }
   }

@@ -384,6 +384,8 @@ GameObject:
   - component: {fileID: 356175641}
   - component: {fileID: 356175640}
   - component: {fileID: 356175639}
+  - component: {fileID: 356175642}
+  - component: {fileID: 356175643}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -405,9 +407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oscManager: {fileID: 356175640}
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
-  waveScale: 0.05
-  strength: 0.1
-  _detectHeight: {fileID: 285564189}
+  _collisionDetection: {fileID: 356175642}
+  _personWaveInput: {fileID: 356175643}
 --- !u!114 &356175640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +439,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356175642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356175638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7823fc9434b8449638ad4d65e903e50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectHeight: {fileID: 285564189}
+  threshold: 0.5
+--- !u!114 &356175643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356175638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e785fe46b998548f39b9bdfb645bdf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveConductor: {fileID: 285564183}
+  waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
+  inputScale: 0.05
+  inputStrength: 0.1
+  targets: []
 --- !u!1 &1514568150
 GameObject:
   m_ObjectHideFlags: 0
