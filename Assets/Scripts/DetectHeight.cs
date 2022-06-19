@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 
+/// <summary>
+/// 高さをチェック
+/// </summary>
 public class DetectHeight : MonoBehaviour
 {
 
     [SerializeField]
     private RenderTexture waveMap;
-
-    private Color[] pixels
-    {
-        get {
-            var crrRt = RenderTexture.active;
-            var texture = new Texture2D(waveMap.width, waveMap.height);
-            texture.ReadPixels(new Rect(0, 0, waveMap.width, waveMap.height), 0, 0);
-            texture.Apply();
-            var colors = texture.GetPixels();
-            RenderTexture.active = crrRt;
-            return colors;
-        }
-    }
 
     private async UniTask<Color> _GetPixel(int x, int y)
     {
@@ -46,7 +36,10 @@ public class DetectHeight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+	if (Input.GetMouseButton(0))
+			{
+				Debug.Log(Input.mousePosition);
+            }
     }
 
     private async void _Calc()
@@ -55,7 +48,7 @@ public class DetectHeight : MonoBehaviour
         {
             await UniTask.Delay(100);
             var res = await this._GetPixel(1, 1);
-            Debug.Log(res);
+            // Debug.Log(res);
         }
     }
 }
