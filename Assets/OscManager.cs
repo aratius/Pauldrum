@@ -12,12 +12,16 @@ public class OscManager : MonoBehaviour
 
   private OscServer _server;
 
+  void Awake()
+  {
+    this.onGetPosition = new UnityEvent<string, Vector2>();
+  }
+
   void Start()
   {
-    this._server = new OscServer(8000);
+    this._server = new OscServer(50000);
     this._server.MessageDispatcher.AddCallback("", this._onReceiveOsc);
 
-    this.onGetPosition = new UnityEvent<string, Vector2>();
   }
 
   void Update()
@@ -27,6 +31,7 @@ public class OscManager : MonoBehaviour
 
   private void _onReceiveOsc(string address, OscDataHandle data)
   {
+    Debug.Log(address);
     Regex touch = new Regex("touch");
     if (touch.IsMatch(address))
     {

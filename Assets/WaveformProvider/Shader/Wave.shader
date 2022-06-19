@@ -70,6 +70,7 @@
 				value = (value + 1) * 0.5;
 				value += _RoundAdjuster * 0.01;
 				return fixed4(value, 0, 0, 1);
+				// return fixed4(value, 0, 0, 1);
 			}
 			ENDCG
 		}
