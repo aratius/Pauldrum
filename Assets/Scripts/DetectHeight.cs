@@ -12,7 +12,7 @@ public class DetectHeight : MonoBehaviour
     [SerializeField]
     private RenderTexture waveMap;
 
-    private async UniTask<Color> _GetPixel(int x, int y)
+    public async UniTask<Color> GetPixel(int x, int y)
     {
         var crrRt = RenderTexture.active;
         RenderTexture.active = waveMap;
@@ -27,28 +27,19 @@ public class DetectHeight : MonoBehaviour
         return color;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public async UniTask<Color> GetPixelFromNormalizedPos(float x, float y)
     {
-        this._Calc();
+        var crrRt = RenderTexture.active;
+        RenderTexture.active = waveMap;
+        var texture = new Texture2D(waveMap.width, waveMap.height);
+
+        await UniTask.WaitForEndOfFrame();
+
+        texture.ReadPixels(new Rect(0, 0, waveMap.width, waveMap.height), 0, 0);
+        texture.Apply();
+        var color = texture.GetPixel((int)(x * waveMap.width), (int)(y * waveMap.height));
+        RenderTexture.active = crrRt;
+        return color;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-	if (Input.GetMouseButton(0))
-			{
-				Debug.Log(Input.mousePosition);
-            }
-    }
-
-    private async void _Calc()
-    {
-        while(true)
-        {
-            await UniTask.Delay(100);
-            var res = await this._GetPixel(1, 1);
-            // Debug.Log(res);
-        }
-    }
 }
