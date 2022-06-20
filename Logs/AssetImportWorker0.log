@@ -1808,3 +1808,28 @@ System memory in use after: 175.6 MB.
 Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 2313.
 Total: 2.052492 ms (FindLiveObjects: 0.303594 ms CreateObjectMapping: 0.075273 ms MarkObjects: 1.603593 ms  DeleteObjects: 0.068137 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000862 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.39 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.975 seconds
+Platform modules already initialized, skipping
+Shader 'Es/Sample/TessellateHeightTransform': fallback shader 'Custom/VTFHeightTransform' not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1619 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 175.9 MB.
+System memory in use after: 176.0 MB.
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 2316.
+Total: 1.936442 ms (FindLiveObjects: 0.328860 ms CreateObjectMapping: 0.055187 ms MarkObjects: 1.460845 ms  DeleteObjects: 0.090601 ms)
+

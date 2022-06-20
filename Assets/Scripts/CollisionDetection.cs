@@ -2,6 +2,10 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 namespace Es.WaveformProvider.Sample
 {
+
+  /// <summary>
+  /// 人と波の衝突判定
+  /// </summary>
   public class CollisionDetection : MonoBehaviour
   {
 

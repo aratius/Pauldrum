@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Es.WaveformProvider.Sample
 {
 	/// <summary>
-	/// Give input of waveform to random position.
+	/// 人と波のインタラクションによるInput
 	/// </summary>
 	public class PersonWaveInput : MonoBehaviour
 	{

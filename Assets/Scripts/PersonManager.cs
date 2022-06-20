@@ -22,13 +22,9 @@ namespace Es.WaveformProvider.Sample
       this._oscManager.onGetPosition.AddListener(this.SetPosition);
     }
 
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Osc中身
+    /// TODO: IDで識別して同時に何回もならないようにする処理
     /// </summary>
     public async void SetPosition(string id, Vector2 position)
     {
