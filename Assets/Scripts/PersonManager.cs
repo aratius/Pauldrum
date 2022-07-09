@@ -36,9 +36,15 @@ namespace Es.WaveformProvider.Sample
       Vector2 uvPos = new Vector2(position.y, position.x);
       Vector2 screenPos = uvPos * size;
 
-      if(await this._collisionDetection.IsCollided(screenPos))
+      if (await this._collisionDetection.IsCollided(screenPos))
       {
         this._personWaveInput.Input(uvPos);
+
+        // ここで音用のOSCおくる
+        int x = (int)Mathf.Ceil(screenPos.x * 8);
+        int y = (int)Mathf.Ceil(screenPos.y * 8);
+        int num = x + y * 8;
+        this._oscManager.Send("", num);
       }
     }
   }
