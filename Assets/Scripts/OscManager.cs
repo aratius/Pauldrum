@@ -24,6 +24,8 @@ public class OscManager : MonoBehaviour
   {
     this._server = new OscServer(this._port);
     this._server.MessageDispatcher.AddCallback("", this._onReceiveOsc);
+    Debug.Log("hello 1");
+
   }
 
   void Update()
@@ -33,6 +35,8 @@ public class OscManager : MonoBehaviour
 
   private void _onReceiveOsc(string address, OscDataHandle data)
   {
+    Debug.Log("hello 2");
+    Debug.Log(address);
     Regex touch = new Regex("touch");
     if (touch.IsMatch(address))
     {
