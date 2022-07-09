@@ -21,18 +21,18 @@ namespace Es.WaveformProvider.Sample
     public async UniTask<bool> IsCollided(Vector2 screenPos)
     {
       var ray = Camera.main.ScreenPointToRay(screenPos);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo))
+      RaycastHit hitInfo;
+      if (Physics.Raycast(ray, out hitInfo))
+      {
+        var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
+        if (waveObject != null)
         {
-          var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
-          if (waveObject != null)
-            {
-              Vector2 hitPointNormalized = hitInfo.textureCoord2;
-              Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
-              Debug.Log(height);
-              if(height.r > 0.5) return true;
-            }
+          Vector2 hitPointNormalized = hitInfo.textureCoord2;
+          Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
+          Debug.Log(height);
+          if (height.r > this.threshold) return true;
         }
+      }
       return false;
     }
 
