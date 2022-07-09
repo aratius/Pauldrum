@@ -245,8 +245,8 @@ MonoBehaviour:
   updateFrameTiming: 10
   adjuster: 0
   stride: 3.4
-  attenuation: 0.96
-  propagationSpeed: 0.5
+  attenuation: 0.99
+  propagationSpeed: 0.05
   inputTextureSize: 512
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
   debug: 1
@@ -424,7 +424,9 @@ MonoBehaviour:
   onGetPosition:
     m_PersistentCalls:
       m_Calls: []
-  _port: 8000
+  _outPort: 8001
+  _host: 192.168.11.2
+  _inPort: 8000
 --- !u!4 &356175641
 Transform:
   m_ObjectHideFlags: 0
