@@ -29,7 +29,6 @@ namespace Es.WaveformProvider.Sample
         {
           Vector2 hitPointNormalized = hitInfo.textureCoord2;
           Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
-          Debug.Log(height);
           if (height.r > this.threshold) return true;
         }
       }

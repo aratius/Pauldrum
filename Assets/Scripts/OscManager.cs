@@ -1,4 +1,4 @@
-using System;
+// using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -65,13 +65,13 @@ public class OscManager : MonoBehaviour
     Regex sensor = new Regex("/sensor.*");
     if (!sensor.IsMatch(address)) return;
 
-    int id = Int32.Parse(address.Substring(8, 1));
-    Debug.Log($"id: {id}");
+    int id = System.Int32.Parse(address.Substring(8, 1));
 
     Regex idReg = new Regex("/sensor_.*_id");
     if (idReg.IsMatch(address))
     {
-      this.onGetId.Invoke(id, data.GetElementAsInt(0));
+      int idData = data.GetElementAsInt(0);
+      this.onGetId.Invoke(id, idData);
     }
 
     Regex xReg = new Regex("/sensor_.*_x");

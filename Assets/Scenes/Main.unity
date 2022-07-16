@@ -242,14 +242,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update: 1
-  updateFrameTiming: 10
+  updateFrameTiming: 3
   adjuster: 0
   stride: 3.4
-  attenuation: 0.99
-  propagationSpeed: 0.05
-  inputTextureSize: 512
+  attenuation: 0.98
+  propagationSpeed: 0.5
+  inputTextureSize: 1024
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
-  debug: 1
+  debug: 0
 --- !u!64 &285564184
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -367,12 +367,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4eda8f07aed430fb6f99a64f00ef77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 2
+  waitTime: 5
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   inputScale: 0.05
   inputStrength: 0.4
   targets:
   - {fileID: 285564183}
+  _oscManager: {fileID: 356175640}
 --- !u!1 &356175638
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,11 +422,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e1f9623fc614532b910b87b06741d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onGetPosition:
+  onGetId:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetX:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetY:
     m_PersistentCalls:
       m_Calls: []
   _outPort: 8001
-  _host: 192.168.11.2
+  _host: 192.168.1.144
   _inPort: 8000
 --- !u!4 &356175641
 Transform:
@@ -454,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _detectHeight: {fileID: 285564189}
-  threshold: 0.55
+  threshold: 0.51
 --- !u!114 &356175643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +478,8 @@ MonoBehaviour:
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   inputScale: 0.05
   inputStrength: 0.4
-  targets: []
+  targets:
+  - {fileID: 285564183}
 --- !u!1 &1514568150
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,3 +573,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1859542780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859542782}
+  - component: {fileID: 1859542781}
+  m_Layer: 0
+  m_Name: Fps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1859542781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859542780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed093c3d35dfdd04aa1458c352c6f33c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1859542782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859542780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

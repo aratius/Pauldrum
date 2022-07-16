@@ -46,10 +46,10 @@ namespace Es.WaveformProvider.Sample
           this._personWaveInput.Input(uvPos);
 
           // ここで音用のOSCおくる
-          int x = (int)Mathf.Ceil(screenPos.x * 8);
-          int y = (int)Mathf.Ceil(screenPos.y * 8);
+          int x = (int)Mathf.Ceil(uvPos.x * 8);
+          int y = (int)Mathf.Ceil(uvPos.y * 8);
           int num = x + y * 8;
-          this._oscManager.Send("", num);
+          this._oscManager.Send("/human", num);
         }
       }
     }
@@ -63,39 +63,13 @@ namespace Es.WaveformProvider.Sample
     private async void _SetX(int id, float x)
     {
       int index = id - 1;
-      this._positions[index].x = x;
+      this._positions[index].y = x;
     }
 
     private async void _SetY(int id, float y)
     {
       int index = id - 1;
       this._positions[index].x = y;
-    }
-
-    /// <summary>
-    /// Osc中身
-    /// TODO: IDで識別して同時に何回もならないようにする処理
-    /// </summary>
-    public async void SetPosition(string id, Vector2 position)
-    {
-      await UniTask.WaitForFixedUpdate();
-
-      Vector2 size = new Vector2(Screen.width, Screen.height);
-      // Vector2 screenPos = position * size;
-      // NOTE: TouchOSCの値に合わせてむりやり値調整しています
-      Vector2 uvPos = new Vector2(position.y, position.x);
-      Vector2 screenPos = uvPos * size;
-
-      if (await this._collisionDetection.IsCollided(screenPos))
-      {
-        this._personWaveInput.Input(uvPos);
-
-        // ここで音用のOSCおくる
-        int x = (int)Mathf.Ceil(screenPos.x * 8);
-        int y = (int)Mathf.Ceil(screenPos.y * 8);
-        int num = x + y * 8;
-        this._oscManager.Send("", num);
-      }
     }
   }
 }
