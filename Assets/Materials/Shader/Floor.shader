@@ -50,6 +50,7 @@ Shader "Unlit/Floor"
 				float height01 = WAVE_HEIGHT(_WaveTex, i.uv) * 0.5 + 0.5;
 				uv += fixed2(height01, height01) * 0.05;
 				fixed4 base = tex2D(_BaseTex, uv);
+				base.rgb += max((1. - height01) * 0.5, 0.);
 				return base;
 			}
 			ENDCG
