@@ -51,6 +51,7 @@ Shader "Unlit/Floor"
 				uv += fixed2(height01, height01) * 0.05;
 				fixed4 base = tex2D(_BaseTex, uv);
 				base.rgb += max((1. - height01) * 0.5, 0.);
+				base.rgb = pow(base.rgb, 1.3);
 				return base;
 			}
 			ENDCG
