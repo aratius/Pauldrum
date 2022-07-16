@@ -4,6 +4,7 @@ Shader "Unlit/Floor"
 	{
 		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
+		_BaseTex("Base",2D) = "gray" {}
 	}
 	SubShader
 	{
@@ -32,6 +33,7 @@ Shader "Unlit/Floor"
 
 			//wave texture definition.
 			WAVE_TEX_DEFINE(_WaveTex)
+			sampler2D _BaseTex;
 
 			v2f vert (appdata v)
 			{
@@ -44,8 +46,11 @@ Shader "Unlit/Floor"
 			float4 frag (v2f i) : SV_Target
 			{
 				//compute wave height.
+				fixed2 uv = i.uv;
 				float height01 = WAVE_HEIGHT(_WaveTex, i.uv) * 0.5 + 0.5;
-				return float4(height01, height01, height01, 1);
+				uv += fixed2(height01, height01) * 0.05;
+				fixed4 base = tex2D(_BaseTex, uv);
+				return base;
 			}
 			ENDCG
 		}
