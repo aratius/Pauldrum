@@ -34,15 +34,18 @@ public class OscManager : MonoBehaviour
 
   void Start()
   {
-    this._server = new OscServer(this._outPort);
+    this._server = new OscServer(this._inPort);
     this._server.MessageDispatcher.AddCallback("", this._onReceiveOsc);
 
-    this._client = new OscClient(this._host, this._inPort);
+    this._client = new OscClient(this._host, this._outPort);
   }
 
   void Update()
   {
-
+    if(Input.GetKeyDown(KeyCode.O))
+    {
+      this.Send("/human", (int)Random.Range(1, 5));
+    }
   }
 
   /// <summary>
@@ -91,7 +94,8 @@ public class OscManager : MonoBehaviour
   /// <param name="val"></param>
   public void Send(string address, int val)
   {
-
+    Debug.Log($"send{val}");
+    this._client.Send(address, val);
   }
 
 }
