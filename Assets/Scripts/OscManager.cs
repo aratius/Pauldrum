@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,7 +9,9 @@ using OscJack;
 public class OscManager : MonoBehaviour
 {
 
-  public UnityEvent<string, Vector2> onGetPosition;
+  public UnityEvent<int, int> onGetId;
+  public UnityEvent<int, float> onGetX;
+  public UnityEvent<int, float> onGetY;
 
   [SerializeField]
   private int _outPort;
@@ -24,7 +27,9 @@ public class OscManager : MonoBehaviour
 
   void Awake()
   {
-    this.onGetPosition = new UnityEvent<string, Vector2>();
+    this.onGetId = new UnityEvent<int, int>();
+    this.onGetX = new UnityEvent<int, float>();
+    this.onGetY = new UnityEvent<int, float>();
   }
 
   void Start()
@@ -47,12 +52,35 @@ public class OscManager : MonoBehaviour
   /// <param name="data"></param>
   private void _onReceiveOsc(string address, OscDataHandle data)
   {
-    Debug.Log("hello");
-    Regex touch = new Regex("touch");
-    if (touch.IsMatch(address))
+    // Regex touch = new Regex("touch");
+    // if (touch.IsMatch(address))
+    // {
+    //   Vector2 position = new Vector2(data.GetElementAsFloat(0), data.GetElementAsFloat(1));
+    //   this.onGetPosition.Invoke(address, position);
+    // }
+
+    Regex sensor = new Regex("/sensor.*");
+    if (!sensor.IsMatch(address)) return;
+
+    int id = Int32.Parse(address.Substring(8, 1));
+    Debug.Log($"id: {id}");
+
+    Regex idReg = new Regex("/sensor_.*_id");
+    if (idReg.IsMatch(address))
     {
-      Vector2 position = new Vector2(data.GetElementAsFloat(0), data.GetElementAsFloat(1));
-      this.onGetPosition.Invoke(address, position);
+      this.onGetId.Invoke(id, data.GetElementAsInt(0));
+    }
+
+    Regex xReg = new Regex("/sensor_.*_x");
+    if (xReg.IsMatch(address))
+    {
+      this.onGetX.Invoke(id, data.GetElementAsFloat(0));
+    }
+
+    Regex yReg = new Regex("/sensor_.*_y");
+    if (yReg.IsMatch(address))
+    {
+      this.onGetY.Invoke(id, data.GetElementAsFloat(0));
     }
   }
 
