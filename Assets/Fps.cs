@@ -5,7 +5,7 @@ public class Fps : MonoBehaviour
 
     void　Awake()
     {
-        Application.targetFrameRate = 100;
+        Application.targetFrameRate = 120;
     }
 
 }

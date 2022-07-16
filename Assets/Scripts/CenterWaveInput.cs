@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Es.WaveformProvider.Sample
 {
+	
+
 	/// <summary>
 	/// Give input of waveform to random position.
 	/// </summary>
@@ -24,6 +26,12 @@ namespace Es.WaveformProvider.Sample
 		[SerializeField]
 		private List<WaveConductor> targets;
 
+		private int crr = 0;
+		private readonly int max = 8;
+
+    [SerializeField]
+    private OscManager _oscManager;
+
 		private void Start()
 		{
 			StartCoroutine(RandomInput());
@@ -38,6 +46,9 @@ namespace Es.WaveformProvider.Sample
 				{
 					var randomUV = new Vector2(0.5f, 0.5f);
 					t.Input(waveform, randomUV, inputScale, inputStrength);
+					crr ++;
+					if(crr > max) crr = 0;
+          this._oscManager.Send("/human", 64 + crr);
 				}
 			}
 		}

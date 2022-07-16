@@ -49,8 +49,7 @@ namespace Es.WaveformProvider.Sample
           int x = (int)Mathf.Ceil(uvPos.x * 8);
           int y = (int)Mathf.Ceil(uvPos.y * 8);
           int num = x + y * 8;
-          this._oscManager.Send("", num);
-          Debug.Log($"ho : {uvPos}");
+          this._oscManager.Send("/human", num);
         }
       }
     }
