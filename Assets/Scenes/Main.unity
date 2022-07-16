@@ -249,7 +249,7 @@ MonoBehaviour:
   propagationSpeed: 0.05
   inputTextureSize: 512
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
-  debug: 1
+  debug: 0
 --- !u!64 &285564184
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -421,11 +421,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e1f9623fc614532b910b87b06741d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onGetPosition:
+  onGetId:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetX:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetY:
     m_PersistentCalls:
       m_Calls: []
   _outPort: 8001
-  _host: 192.168.11.2
+  _host: 192.168.1.144
   _inPort: 8000
 --- !u!4 &356175641
 Transform:
@@ -454,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _detectHeight: {fileID: 285564189}
-  threshold: 0.55
+  threshold: 0.5
 --- !u!114 &356175643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +477,8 @@ MonoBehaviour:
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   inputScale: 0.05
   inputStrength: 0.4
-  targets: []
+  targets:
+  - {fileID: 285564183}
 --- !u!1 &1514568150
 GameObject:
   m_ObjectHideFlags: 0
