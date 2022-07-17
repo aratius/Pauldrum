@@ -25,8 +25,7 @@ namespace Es.WaveformProvider.Sample
 
 		public void Input(Vector2 uvPos)
 		{
-	  Debug.Log($"input {uvPos}");
-      this.waveConductor.Input(waveform, uvPos, inputScale, inputStrength);
+			this.waveConductor.Input(waveform, uvPos, inputScale, inputStrength);
 		}
 	}
 }

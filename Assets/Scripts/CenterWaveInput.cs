@@ -48,7 +48,7 @@ namespace Es.WaveformProvider.Sample
 					t.Input(waveform, randomUV, inputScale, inputStrength);
 					crr ++;
 					if(crr > max) crr = 0;
-          this._oscManager.Send("/human", 64 + crr);
+					this._oscManager.Send("/human", 64 + crr);
 				}
 			}
 		}

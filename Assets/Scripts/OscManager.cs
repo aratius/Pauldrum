@@ -55,12 +55,6 @@ public class OscManager : MonoBehaviour
   /// <param name="data"></param>
   private void _onReceiveOsc(string address, OscDataHandle data)
   {
-    // Regex touch = new Regex("touch");
-    // if (touch.IsMatch(address))
-    // {
-    //   Vector2 position = new Vector2(data.GetElementAsFloat(0), data.GetElementAsFloat(1));
-    //   this.onGetPosition.Invoke(address, position);
-    // }
 
     Regex sensor = new Regex("/sensor.*");
     if (!sensor.IsMatch(address)) return;
