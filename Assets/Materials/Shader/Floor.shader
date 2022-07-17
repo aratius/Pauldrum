@@ -48,9 +48,14 @@ Shader "Unlit/Floor"
 				//compute wave height.
 				fixed2 uv = i.uv;
 				float height01 = WAVE_HEIGHT(_WaveTex, i.uv) * 0.5 + 0.5;
-				uv += fixed2(height01, height01) * 0.05;
+				fixed2 uvCentered = uv - 0.5;
+				fixed2 uvNorm = uvCentered / max(abs(uvCentered.x), abs(uvCentered.y));
+				uv += height01 * 0.05 * uvNorm * min(length(uvCentered*10.), 1);  // ど真ん中だけは歪まないのが最後の項
+
 				fixed4 base = tex2D(_BaseTex, uv);
 				base.rgb += max((1. - height01) * 0.5, 0.);
+				base.rgb = pow(base.rgb, 1.4);
+				base.b *= 1.4;
 				return base;
 			}
 			ENDCG
