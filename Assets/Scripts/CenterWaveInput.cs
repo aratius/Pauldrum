@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace Es.WaveformProvider.Sample
 {
@@ -26,15 +27,19 @@ namespace Es.WaveformProvider.Sample
 		[SerializeField]
 		private List<WaveConductor> targets;
 
+		
+		[SerializeField]
+		private OscManager _oscManager;
+
 		private int crr = 0;
 		private readonly int max = 8;
-
-    [SerializeField]
-    private OscManager _oscManager;
 
 		private void Start()
 		{
 			StartCoroutine(RandomInput());
+
+			this._oscManager.onDrop.AddListener(this._Drop);
+			
 		}
 
 		private IEnumerator RandomInput()
@@ -42,14 +47,19 @@ namespace Es.WaveformProvider.Sample
 			while (true)
 			{
 				yield return new WaitForSeconds(waitTime);
-				foreach (var t in targets)
-				{
-					var randomUV = new Vector2(0.5f, 0.5f);
-					t.Input(waveform, randomUV, inputScale, inputStrength);
-					crr ++;
-					if(crr > max) crr = 0;
-					this._oscManager.Send("/human", 64 + crr);
-				}
+				this._Drop();
+			}
+		}
+
+		private async void _Drop(){
+			await UniTask.WaitForFixedUpdate();
+			foreach (var t in targets)
+			{
+				var randomUV = new Vector2(0.5f, 0.5f);
+				t.Input(waveform, randomUV, inputScale, inputStrength);
+				crr ++;
+				if(crr > max) crr = 0;
+				this._oscManager.Send("/human", 64 + crr);
 			}
 		}
 	}

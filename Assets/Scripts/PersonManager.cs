@@ -40,6 +40,7 @@ namespace Es.WaveformProvider.Sample
         // NOTE: 0-1だっけ？
         Vector2 uvPos = new Vector2(position.y, position.x);
         Vector2 screenPos = uvPos * size;
+        Debug.Log($"human{i}");
 
         if (await this._collisionDetection.IsCollided(screenPos))
         {
@@ -56,19 +57,21 @@ namespace Es.WaveformProvider.Sample
 
     private async void _SetId(int id, int val)
     {
-      int index = id - 1;
+      int index = id;
+      Debug.Log(index);
       this._ids[index] = val;
+      if(val != 0) Debug.Log(" not 0 !");
     }
 
     private async void _SetX(int id, float x)
     {
-      int index = id - 1;
+      int index = id;
       this._positions[index].y = x;
     }
 
     private async void _SetY(int id, float y)
     {
-      int index = id - 1;
+      int index = id;
       this._positions[index].x = y;
     }
   }

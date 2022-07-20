@@ -12,6 +12,7 @@ public class OscManager : MonoBehaviour
   public UnityEvent<int, int> onGetId;
   public UnityEvent<int, float> onGetX;
   public UnityEvent<int, float> onGetY;
+  public UnityEvent onDrop;
 
   [SerializeField]
   private int _outPort;
@@ -30,14 +31,17 @@ public class OscManager : MonoBehaviour
     this.onGetId = new UnityEvent<int, int>();
     this.onGetX = new UnityEvent<int, float>();
     this.onGetY = new UnityEvent<int, float>();
-  }
+    this.onDrop = new UnityEvent();
 
-  void Start()
-  {
+    
     this._server = new OscServer(this._inPort);
     this._server.MessageDispatcher.AddCallback("", this._onReceiveOsc);
 
     this._client = new OscClient(this._host, this._outPort);
+  }
+
+  void Start()
+  {
   }
 
   void Update()
@@ -55,6 +59,10 @@ public class OscManager : MonoBehaviour
   /// <param name="data"></param>
   private void _onReceiveOsc(string address, OscDataHandle data)
   {
+
+    if(address == "/waterdrops") {
+      this.onDrop.Invoke();
+    }
 
     Regex sensor = new Regex("/sensor.*");
     if (!sensor.IsMatch(address)) return;
@@ -93,3 +101,4 @@ public class OscManager : MonoBehaviour
   }
 
 }
+;
