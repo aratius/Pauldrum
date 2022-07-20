@@ -351,7 +351,7 @@ MonoBehaviour:
   propagationSpeed: 0.103
   inputTextureSize: 1024
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
-  debug: 1
+  debug: 0
 --- !u!64 &285564184
 MeshCollider:
   m_ObjectHideFlags: 0
