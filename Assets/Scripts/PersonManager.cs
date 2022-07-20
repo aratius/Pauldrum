@@ -20,11 +20,22 @@ namespace Es.WaveformProvider.Sample
     private Vector2[] _positions = new Vector2[10];
     private int[] _ids = new int[10];
 
+    // 連続衝突を防ぐためのパラメータ 0 or 1
+    private int[] _colliedStatus = new int[64];
+
     void Start()
     {
       this._oscManager.onGetId.AddListener(this._SetId);
       this._oscManager.onGetX.AddListener(this._SetX);
       this._oscManager.onGetY.AddListener(this._SetY);
+
+      for(int i = 0; i < this._ids.Length; i++) {
+        this._ids[i] = 0;
+      }
+      
+      for(int i = 0; i < this._colliedStatus.Length; i++) {
+        this._colliedStatus[i] = 0;
+      }
     }
 
     async void Update()
@@ -40,16 +51,21 @@ namespace Es.WaveformProvider.Sample
         // NOTE: 0-1だっけ？
         Vector2 uvPos = new Vector2(position.y, position.x);
         Vector2 screenPos = uvPos * size;
-        Debug.Log($"human{i}");
 
         if (await this._collisionDetection.IsCollided(screenPos))
         {
-          this._personWaveInput.Input(uvPos);
-
           // ここで音用のOSCおくる
           int x = (int)Mathf.Ceil(uvPos.x * 8);
           int y = (int)Mathf.Ceil(uvPos.y * 8);
           int num = x + y * 8;
+
+          if(this._colliedStatus[num] == 1) return;
+
+          this._colliedStatus[num] = 1;
+          this._MakeEnablePlace(num);
+
+          this._personWaveInput.Input(uvPos);
+
           this._oscManager.Send("/human", num);
         }
       }
@@ -58,9 +74,7 @@ namespace Es.WaveformProvider.Sample
     private async void _SetId(int id, int val)
     {
       int index = id;
-      Debug.Log(index);
       this._ids[index] = val;
-      if(val != 0) Debug.Log(" not 0 !");
     }
 
     private async void _SetX(int id, float x)
@@ -73,6 +87,11 @@ namespace Es.WaveformProvider.Sample
     {
       int index = id;
       this._positions[index].x = y;
+    }
+
+    private async void _MakeEnablePlace(int num) {
+      await UniTask.Delay(2000);
+      this._colliedStatus[num] = 0;
     }
   }
 }

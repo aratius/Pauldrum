@@ -243,10 +243,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update: 1
-  updateFrameTiming: 3
+  updateFrameTiming: 1
   adjuster: 0
   stride: 3.4
-  attenuation: 0.98
+  attenuation: 0.99
   propagationSpeed: 0.103
   inputTextureSize: 1024
   output: {fileID: 8400000, guid: 806edd5993c86e94c881c4ccdc7d71f3, type: 2}
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _detectHeight: {fileID: 285564189}
-  threshold: 0.5
+  threshold: 0.55
 --- !u!114 &356175643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
   waveConductor: {fileID: 285564183}
   waveform: {fileID: 2800000, guid: e41f4726e37522348bee867507137bdc, type: 3}
   inputScale: 0.05
-  inputStrength: 0.4
+  inputStrength: 0.1
   targets:
   - {fileID: 285564183}
 --- !u!1 &1514568150
