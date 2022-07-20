@@ -49,7 +49,7 @@ namespace Es.WaveformProvider.Sample
         Vector2 position = this._positions[i];
         // NOTE: TouchOSCの値に合わせてむりやり値調整しています
         // NOTE: 0-1だっけ？
-        Vector2 uvPos = new Vector2(position.y, position.x);
+        Vector2 uvPos = new Vector2(position.x, position.y);
         Vector2 screenPos = uvPos * size;
 
 
@@ -65,7 +65,7 @@ namespace Es.WaveformProvider.Sample
           this._colliedStatus[num] = 1;
           this._MakeEnablePlace(num);
 
-          this._personWaveInput.Input(uvPos);
+          this._personWaveInput.Input((uvPos - Vector2.one * 0.5f) * new Vector2(1, 9f/16f) + Vector2.one * 0.5f);
 
           this._oscManager.Send("/human", num);
         }
@@ -81,13 +81,14 @@ namespace Es.WaveformProvider.Sample
     private async void _SetX(int id, float x)
     {
       int index = id;
-      this._positions[index].y = x;
+      this._positions[index].x = x;
     }
 
     private async void _SetY(int id, float y)
     {
       int index = id;
-      this._positions[index].x = ((y-0.5f) * 9f/16f) + 0.5f;
+      // this._positions[index].x = ((y-0.5f) * 9f/16f) + 0.5f;
+      this._positions[index].y = y;
     }
 
     private async void _MakeEnablePlace(int num) {

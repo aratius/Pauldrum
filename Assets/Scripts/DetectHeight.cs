@@ -37,7 +37,7 @@ public class DetectHeight : MonoBehaviour
     RenderTexture.active = waveMap;
     var texture = new Texture2D(waveMap.width, waveMap.height);
 
-    debug.Hoge($"{(int)(x * waveMap.width)} {(int)(y * waveMap.height)}");
+    // debug.Hoge($"{(int)(x * waveMap.width)} {(int)(y * waveMap.height)}");
 
     await UniTask.WaitForEndOfFrame();
 

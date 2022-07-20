@@ -31,8 +31,11 @@ namespace Es.WaveformProvider.Sample
         var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
         if (waveObject != null)
         {
-          Vector2 hitPointNormalized = hitInfo.textureCoord;
+          Vector2 hitPointNormalized = hitInfo.textureCoord2;
           Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
+
+    debug.Hoge($"{Mathf.Floor(height.r * 100f)/010f}");
+
           if (height.r > this.threshold) return true;
         }
       }
