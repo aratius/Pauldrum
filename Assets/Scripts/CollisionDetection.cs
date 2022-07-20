@@ -14,6 +14,10 @@ namespace Es.WaveformProvider.Sample
     [SerializeField]
     private float threshold;
 
+    
+    [SerializeField]
+    private MyDebug debug;
+
     /// <summary>
     /// 衝突した
     /// </summary>
@@ -27,7 +31,7 @@ namespace Es.WaveformProvider.Sample
         var waveObject = hitInfo.transform.GetComponent<WaveConductor>();
         if (waveObject != null)
         {
-          Vector2 hitPointNormalized = hitInfo.textureCoord2;
+          Vector2 hitPointNormalized = hitInfo.textureCoord;
           Color height = await this._detectHeight.GetPixelFromNormalizedPos(hitPointNormalized.x, hitPointNormalized.y);
           if (height.r > this.threshold) return true;
         }

@@ -12,6 +12,10 @@ public class DetectHeight : MonoBehaviour
   [SerializeField]
   private RenderTexture waveMap;
 
+  
+    [SerializeField]
+    private MyDebug debug;
+
   public async UniTask<Color> GetPixel(int x, int y)
   {
     var crrRt = RenderTexture.active;
@@ -32,6 +36,8 @@ public class DetectHeight : MonoBehaviour
     var crrRt = RenderTexture.active;
     RenderTexture.active = waveMap;
     var texture = new Texture2D(waveMap.width, waveMap.height);
+
+    debug.Hoge($"{(int)(x * waveMap.width)} {(int)(y * waveMap.height)}");
 
     await UniTask.WaitForEndOfFrame();
 

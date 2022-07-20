@@ -32,7 +32,6 @@ public class OscManager : MonoBehaviour
     this.onGetX = new UnityEvent<int, float>();
     this.onGetY = new UnityEvent<int, float>();
     this.onDrop = new UnityEvent();
-
     
     this._server = new OscServer(this._inPort);
     this._server.MessageDispatcher.AddCallback("", this._onReceiveOsc);

@@ -52,6 +52,7 @@ namespace Es.WaveformProvider.Sample
         Vector2 uvPos = new Vector2(position.y, position.x);
         Vector2 screenPos = uvPos * size;
 
+
         if (await this._collisionDetection.IsCollided(screenPos))
         {
           // ここで音用のOSCおくる
@@ -86,7 +87,7 @@ namespace Es.WaveformProvider.Sample
     private async void _SetY(int id, float y)
     {
       int index = id;
-      this._positions[index].x = y;
+      this._positions[index].x = ((y-0.5f) * 9f/16f) + 0.5f;
     }
 
     private async void _MakeEnablePlace(int num) {
