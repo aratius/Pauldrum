@@ -5,10 +5,13 @@ Shader "Unlit/Floor"
 		//this property is populated with the wave's RenderTexture.
 		_WaveTex("Wave",2D) = "gray" {}
 		_BaseTex("Base",2D) = "gray" {}
+		_EdgeTex("Edge",2D) = "gray" {}
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType"="Transparent" "Queue" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
+		LOD 100
 
 		Pass
 		{
@@ -34,6 +37,7 @@ Shader "Unlit/Floor"
 			//wave texture definition.
 			WAVE_TEX_DEFINE(_WaveTex)
 			sampler2D _BaseTex;
+			sampler2D _EdgeTex;
 
 			v2f vert (appdata v)
 			{
@@ -45,6 +49,7 @@ Shader "Unlit/Floor"
 
 			float4 frag (v2f i) : SV_Target
 			{
+
 				//compute wave height.
 				fixed2 uv = i.uv;
 				float height01 = WAVE_HEIGHT(_WaveTex, i.uv) * 0.5 + 0.5;
@@ -56,6 +61,10 @@ Shader "Unlit/Floor"
 				base.rgb += max((1. - height01) * 0.5, 0.);
 				base.rgb = pow(base.rgb, 1.4);
 				base.b *= 1.4;
+
+				float a = tex2D(_EdgeTex, (i.uv - fixed2(0.5, 0.5)) * fixed2(1., 16./9.) * fixed2(1.12, 1.12) + fixed2(0.5, 0.5)).a;
+				base.a = 1. - a;
+
 				return base;
 			}
 			ENDCG
